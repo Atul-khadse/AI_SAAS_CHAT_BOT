@@ -1,11 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserDataContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const { user, setUser } = useContext(UserDataContext);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const userData = {
+      email: email,
+      password: password
+    }
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData);
+
+      if (response.status === 200) {
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem('token', data.token);
+
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Error during login:', error.response.data);
+    }
+
+    setEmail('');
+    setPassword('');
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
         <h2 className="text-2xl font-bold text-center">Login</h2>
-        <form className="space-y-6">
+        <form onSubmit={submitHandler} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email
@@ -15,6 +49,9 @@ const Login = () => {
               id="email"
               className="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
               placeholder="Email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -26,6 +63,9 @@ const Login = () => {
               id="password"
               className="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
               placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div>

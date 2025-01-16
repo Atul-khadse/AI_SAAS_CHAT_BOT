@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
 import Header from "./components/Header";
+import Start from "./pages/Start";
 
 
 function App() {
@@ -13,10 +14,11 @@ function App() {
     <div>
      <Header />
       <Routes>
-        <Route path='/' element={<Home/>} />
+      <Route path='/' element={<Start/>} />
+        <Route path='/home' element={<Home/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<SignUp/>} />
-        <Route path='/Chat' element={<Chat/>} />
+        <Route path='/chat' element={<Chat/>} />
         <Route path='/*' element={<NotFound/>} />
       </Routes>
     </div>
