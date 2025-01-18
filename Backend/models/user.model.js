@@ -8,7 +8,7 @@ const { type } = require("os");
 const chatSchema = new mongoose.Schema({
     id:{
         type: String,
-        default: randomUUID()
+        default: () => randomUUID()
     },
     content:{
         type:String,
@@ -35,7 +35,7 @@ const userSchema  = new mongoose.Schema({
         email:{
             type:String,
             required:true,
-            minlength:[5, 'Email name munst be at least 3 charaters']
+            minlength:[5, 'Email must be at least 5 characters']
         },
         password:{
             type:String,

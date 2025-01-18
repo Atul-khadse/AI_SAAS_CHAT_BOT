@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { UserDataContext } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
+
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,14 +20,14 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData);
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/users/login`, userData);
 
       if (response.status === 200) {
         const data = response.data;
         setUser(data.user);
         localStorage.setItem('token', data.token);
 
-        navigate('/home');
+        navigate('/chat');
       }
     } catch (error) {
       console.error('Error during login:', error.response.data);
@@ -37,6 +39,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+     
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
         <h2 className="text-2xl font-bold text-center">Login</h2>
         <form onSubmit={submitHandler} className="space-y-6">
@@ -75,6 +78,7 @@ const Login = () => {
             >
               Login
             </button>
+            <p className="text-center">New here? <Link to='/signup' className="text-blue-600">Create new Account</Link></p>
           </div>
         </form>
       </div>

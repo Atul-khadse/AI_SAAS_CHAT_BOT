@@ -21,7 +21,8 @@ module.exports.registerUser = async (req, res, next) => {
     const hashPassword = await userModel.hashPassword(password);
 
     const user = await userService.createUser({
-        fullname,
+        firstname: fullname.firstname,
+        lastname: fullname.lastname,
         email,
         password: hashPassword
     });
@@ -29,7 +30,7 @@ module.exports.registerUser = async (req, res, next) => {
     const token = user.generateAuthToken();
 
     res.status(201).json({ token, user });
-}
+};
 
 module.exports.loginUser = async (req, res, next) => {
     const errors = validationResult(req);
@@ -56,4 +57,19 @@ module.exports.loginUser = async (req, res, next) => {
     res.cookie('token', token);
 
     res.status(200).json({ token, user });
-}
+};
+
+module.exports.logoutUser = async (req, res, next) => {
+    try {
+        await userService.logoutUser(req.user);
+        res.clearCookie('token');
+        res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports.logout = (req, res) => {
+    res.clearCookie('token');
+    res.status(200).json({ message: 'Logged out successfully' });
+};

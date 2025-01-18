@@ -1,18 +1,34 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserDataContext } from '../context/AuthContext';
+import axios from 'axios';
 
 const Header = () => {
   const { user, setUser } = useContext(UserDataContext);
   const navigate = useNavigate();
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
 
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem('token');
-    navigate('/');
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:4000/api/users/logout', {}, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      localStorage.removeItem('token');
+      setUser(null);
+      setIsLoggedOut(true);
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
   };
 
-
+  useEffect(() => {
+    if (isLoggedOut) {
+      setIsLoggedOut(false);
+    }
+  }, [isLoggedOut]);
 
   return (
     <div className="bg-blue-950 w-full h-20 flex justify-between items-center px-4 fixed top-0 z-50">
@@ -24,11 +40,10 @@ const Header = () => {
       <div className="flex gap-3">
         {user ? (
           <>
-          <div className='bg-red-900'>heloo</div>
             <Link to="/chat" className="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
               CHAT
             </Link>
-            <Link to="/" onClick={handleLogout} className="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
+            <Link to="/login" onClick={handleLogout} className="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">
               LOGOUT
             </Link>
           </>
