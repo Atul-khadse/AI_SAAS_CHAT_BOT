@@ -1,9 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { UserDataContext } from '../context/AuthContext';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-
-
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -38,13 +36,12 @@ const Login = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-     
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
+    <div className="flex items-center justify-center min-h-screen bg-slate-900">
+      <div className="w-full max-w-md p-8 m-4 space-y-6 bg-slate-800 text-white rounded-xl bg-opacity-5 shadow-2xl">
         <h2 className="text-2xl font-bold text-center">Login</h2>
         <form onSubmit={submitHandler} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium">
               Email
             </label>
             <input
@@ -58,13 +55,13 @@ const Login = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium">
               Password
             </label>
             <input
               type="password"
               id="password"
-              className="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              className="w-full px-3 py-2 mt-1 text-black border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
               placeholder="Password"
               required
               value={password}
