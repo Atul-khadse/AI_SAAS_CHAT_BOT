@@ -24,7 +24,9 @@ app.use(cors({
     }
   },
   methods: ['GET', 'POST'],
-  credentials: true
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Access-Control-Allow-Origin']
 }));
 app.use(express.json());
 app.use(cookieParser());
