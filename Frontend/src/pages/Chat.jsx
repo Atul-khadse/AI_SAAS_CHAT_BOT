@@ -30,7 +30,7 @@ const Chat = () => {
     setMessage('');
 
     try {
-      const response = await axios.post('http://localhost:4000/api/chats/new', newChat, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/chats/new` , newChat, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

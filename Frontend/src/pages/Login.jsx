@@ -42,12 +42,12 @@ const Login = () => {
         <form onSubmit={submitHandler} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium">
-              Email
+              Email 
             </label>
             <input
               type="email"
               id="email"
-              className="w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+              className="w-full px-3 py-2 mt-1 border text-black rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300"
               placeholder="Email"
               required
               value={email}
