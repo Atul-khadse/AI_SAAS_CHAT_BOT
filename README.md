@@ -2,6 +2,9 @@
 
 AI-SaaS Chat Bot is a web application that allows users to interact with an AI-powered chatbot. The chatbot can respond to user messages and provide assistance based on the input provided.
 
+
+https://github.com/user-attachments/assets/91c45e32-2ce4-43d1-a889-2a97c3e2aa41
+
 ## Features
 
 - User authentication (login and signup)
