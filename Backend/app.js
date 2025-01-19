@@ -11,7 +11,7 @@ connectToDb();
 
 const allowedOrigins = [
   'https://ai-saas-chat-bot-backend.onrender.com',
-  'https://ai-saas-chat-bot-frontend.onrender.com' // Add this line
+  'https://ai-saas-chat-bot-frontend.onrender.com'
 ]; 
 
 app.use(cors({
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
     res.send("hello jee")
 });
 
-app.use('/api/users', userRouters);
+app.use('/api/users', userRouters); // Ensure this line is correct
 app.use('/api/chats', chatRouters);
 
 module.exports = app;
