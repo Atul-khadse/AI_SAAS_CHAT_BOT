@@ -9,7 +9,10 @@ const cors = require('cors');
 
 connectToDb();
 
-const allowedOrigins = ['https://ai-saas-chat-bot-backend.onrender.com']; 
+const allowedOrigins = [
+  'https://ai-saas-chat-bot-backend.onrender.com',
+  'https://ai-saas-chat-bot-frontend.onrender.com' // Add this line
+]; 
 
 app.use(cors({
   origin: function (origin, callback) {
