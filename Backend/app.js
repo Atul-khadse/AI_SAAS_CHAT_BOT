@@ -11,7 +11,8 @@ connectToDb();
 
 const allowedOrigins = [
   'https://ai-saas-chat-bot-backend.onrender.com',
-  'https://ai-saas-chat-bot-frontend.onrender.com'
+  'https://ai-saas-chat-bot-frontend.onrender.com',
+  'http://localhost:5173'
 ]; 
 
 app.use(cors({
