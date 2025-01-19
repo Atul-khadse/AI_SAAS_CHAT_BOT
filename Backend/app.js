@@ -9,7 +9,7 @@ const cors = require('cors');
 
 connectToDb();
 
-app.use(cors({origin: "*"}));
+app.use(cors({origin: "https://ai-saas-chat-bot-backend.onrender.com"}));
 app.use(express.json());
 app.use(cookieParser());
 
